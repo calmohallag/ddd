@@ -62,6 +62,15 @@ class CollectionValueObject implements \Iterator, \Countable, ValueObject
         return \array_reduce($this->items, $func, $initial);
     }
 
+    public function sort(callable $func)
+    {
+        $self = clone $this;
+
+        \usort($self->items, $func);
+
+        return $self;
+    }
+
     public function isEmpty(): bool
     {
         return 0 === $this->count();
